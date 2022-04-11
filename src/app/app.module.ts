@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AdvertModule } from './advert/advert.module';
@@ -13,6 +14,7 @@ import { StaticModule } from './static/static.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CoreModule.forRoot(),
     AppRoutingModule,
     AuthModule,

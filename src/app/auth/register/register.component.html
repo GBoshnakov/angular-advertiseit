@@ -1,27 +1,110 @@
+
+
 <div class="registration-form">
-    <form>
+
+    <ng-container *ngIf="errorMessage" >
+        <p class="alert alert-danger" style="text-align: center;">{{errorMessage}}</p>
+    </ng-container>
+
+    <form [formGroup]="registerFormGroup" (ngSubmit)="submitHandler()">
         <div class="form-icon">
             <span><i class="fas fa-user"></i></span>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="username" placeholder="Username">
+            <input formControlName="username"
+                [ngClass]="{'is-valid': !registerFormGroup.controls['username'].invalid, 'is-invalid': registerFormGroup.controls['username'].touched && registerFormGroup.controls['username'].invalid }"
+                type="text" class="form-control item is-invalid" id="username" name="username" placeholder="Username">
         </div>
+        <ng-container
+            *ngIf="registerFormGroup.controls['username'].touched && registerFormGroup.controls['username'].invalid">
+            <p *ngIf="registerFormGroup.controls['username'].errors.required" class="alert alert-danger">
+                Username is required!
+            </p>
+
+            <p *ngIf="registerFormGroup.controls['username'].errors.minlength" class="alert alert-danger">
+                Username must be at least 5 characters long!
+            </p>
+        </ng-container>
+
         <div class="form-group">
-            <input type="text" class="form-control item" id="email" placeholder="Email">
+            <input
+                [ngClass]="{'is-valid': !registerFormGroup.controls['email'].invalid, 'is-invalid': registerFormGroup.controls['email'].touched && registerFormGroup.controls['email'].invalid }"
+                formControlName="email" type="text" class="form-control item" id="email" name="email"
+                placeholder="Email">
         </div>
+
+        <ng-container
+            *ngIf="registerFormGroup.controls['email'].touched && registerFormGroup.controls['email'].invalid">
+            <p *ngIf="registerFormGroup.controls['email'].errors.required" class="alert alert-danger">
+                Email is required!
+            </p>
+
+            <p *ngIf="registerFormGroup.controls['email'].errors.minlength" class="alert alert-danger">
+                Email must be at least 5 characters long!
+            </p>
+
+            <p *ngIf="registerFormGroup.controls['email'].errors.email" class="alert alert-danger">
+                Email is not valid!
+            </p>
+        </ng-container>
+
         <div class="form-group">
-            <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number">
+            <input formControlName="phone"
+                [ngClass]="{'is-valid': !registerFormGroup.controls['phone'].invalid, 'is-invalid': registerFormGroup.controls['phone'].touched && registerFormGroup.controls['phone'].invalid }"
+                type="text" class="form-control item" id="phone-number" name="phone" placeholder="Mobile Number">
+        </div>
+
+        <ng-container
+            *ngIf="registerFormGroup.controls['phone'].touched && registerFormGroup.controls['phone'].invalid">
+            <p *ngIf="registerFormGroup.controls['phone'].errors.required" class="alert alert-danger">
+                Phone is required!
+            </p>
+
+            <p *ngIf="registerFormGroup.controls['phone'].errors.pattern" class="alert alert-danger">
+                Mobile number must be 10 digits long!
+            </p>
+        </ng-container>
+
+        <div formGroupName="passwords">
+            <div class="form-group">
+                <input formControlName="password"
+                    [ngClass]="{'is-valid': !passwordsGroup.controls['password'].invalid, 'is-invalid': passwordsGroup.controls['password'].touched && passwordsGroup.controls['password'].invalid }"
+                    type="password" class="form-control item" id="password" name="password" placeholder="Password">
+            </div>
+
+            <ng-container
+                *ngIf="passwordsGroup.controls['password'].touched && passwordsGroup.controls['password'].invalid">
+                <p *ngIf="passwordsGroup.controls['password'].errors.required" class="alert alert-danger">
+                    Password is required!
+                </p>
+
+                <p *ngIf="passwordsGroup.controls['password'].errors.minlength" class="alert alert-danger">
+                    Password must be at least 5 characters long!
+                </p>
+            </ng-container>
+
+            <div class="form-group">
+                <input formControlName="repass" 
+                [ngClass]="{'is-valid': !passwordsGroup.controls['repass'].invalid, 'is-invalid': passwordsGroup.controls['repass'].touched && passwordsGroup.controls['repass'].invalid }"
+                type="password" class="form-control item" id="repass" name="repass"
+                    placeholder="Repeat Password">
+            </div>
+
+            <ng-container
+                *ngIf="passwordsGroup.controls['repass'].touched && passwordsGroup.controls['repass'].invalid">
+                <p *ngIf="passwordsGroup.controls['repass'].errors.required" class="alert alert-danger">
+                    Password is required!
+                </p>
+
+                <p *ngIf="passwordsGroup.controls['repass'].errors.passwordsMatch" class="alert alert-danger">
+                    Passwords don't match!
+                </p>
+            </ng-container>
+
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control item" id="password" placeholder="Password">
-        </div>
-
-        <div class="form-group">
-            <input type="password" class="form-control item" id="repass" placeholder="Repeat Password">
-        </div>
-        <div class="form-group">
-            <button type="button" class="btn btn-block create-account">Create Account</button>
+            <button [disabled]="registerFormGroup.invalid" class="btn btn-block create-account">Create Account</button>
         </div>
     </form>
     <div class="account">

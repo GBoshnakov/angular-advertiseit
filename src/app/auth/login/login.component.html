@@ -1,18 +1,50 @@
 <div class="registration-form">
-    <form>
+
+    <ng-container *ngIf="errorMessage" >
+        <p class="alert alert-danger" style="text-align: center;">{{errorMessage}}</p>
+    </ng-container>
+
+    <form [formGroup]="loginFormGroup" (ngSubmit)="submitHandler()">
         <div class="form-icon">
             <span><i class="fas fa-user"></i></span>
         </div>
-        <div class="form-group">
-            <input type="text" class="form-control item" id="username" placeholder="Username">
-        </div>
 
         <div class="form-group">
-            <input type="password" class="form-control item" id="password" placeholder="Password">
+            <input formControlName="username" 
+            [ngClass]="{'is-valid': !loginFormGroup.controls['username'].invalid, 'is-invalid': loginFormGroup.controls['username'].touched && loginFormGroup.controls['username'].invalid }"
+            type="text" class="form-control item" id="username" name="username" placeholder="Username">
         </div>
 
+        <ng-container
+            *ngIf="loginFormGroup.controls['username'].touched && loginFormGroup.controls['username'].invalid">
+            <p *ngIf="loginFormGroup.controls['username'].errors.required" class="alert alert-danger">
+                Username is required! 
+            </p>
+
+            <p *ngIf="loginFormGroup.controls['username'].errors.minlength" class="alert alert-danger">
+                Username must be at least 5 characters long!
+            </p>
+        </ng-container>
+
         <div class="form-group">
-            <button type="button" class="btn btn-block create-account">Login</button>
+            <input formControlName="password"
+            [ngClass]="{'is-valid': !loginFormGroup.controls['password'].invalid, 'is-invalid': loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid }"
+            type="password" class="form-control item" id="password" name="password" placeholder="Password">
+        </div>
+
+        <ng-container
+            *ngIf="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid">
+            <p *ngIf="loginFormGroup.controls['password'].errors.required" class="alert alert-danger">
+                Password is required! 
+            </p>
+
+            <p *ngIf="loginFormGroup.controls['password'].errors.minlength" class="alert alert-danger">
+                Password must be at least 5 characters long!
+            </p>
+        </ng-container>
+
+        <div class="form-group">
+            <button [disabled]="loginFormGroup.invalid" class="btn btn-block create-account">Login</button>
         </div>
     </form>
     <div class="account">

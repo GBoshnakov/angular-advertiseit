@@ -2,8 +2,8 @@ export interface IRegData {
     username: string,
     email: string,
     password: string,
-    phone: string,
-    repeatPassword: string
+    phone: number,
+    repass: string
 };
 
 export interface ILogData {

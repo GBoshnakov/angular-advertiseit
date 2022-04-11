@@ -55,7 +55,7 @@
             <a class="nav-link" routerLink="/about">About</a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isLogged">
             <ul class="navbar-nav nav-item auth-bar">
               <li>
                 <a class="nav-link btn btn-outline-secondary auth-btn" routerLink="/login">Login</a>
@@ -66,7 +66,7 @@
             </ul>
           </li>
           
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLogged">
 
             <ul class="navbar-nav nav-item auth-bar">
               <li class="nav-item">
@@ -77,7 +77,7 @@
                 <a class="nav-link" href="#">My Adverts</a>
               </li>
               <li>
-                <a class="nav-link btn btn-outline-secondary auth-btn" href="javascript:void(0)">Logout</a>
+                <a (click)="logoutHandler()" class="nav-link btn btn-outline-secondary auth-btn" href="javascript:void(0)">Logout</a>
               </li>
             </ul>
           </li>
