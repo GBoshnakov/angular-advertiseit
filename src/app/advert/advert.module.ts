@@ -5,6 +5,7 @@ import { AdvertRoutingModule } from './advert-routing.module';
 import { CreateNewComponent } from './create-new/create-new.component';
 import { MyAdvertsComponent } from './my-adverts/my-adverts.component';
 import { AdvertDetailsComponent } from './advert-details/advert-details.component';
+import { EditAdvertComponent } from './edit-advert/edit-advert.component';
 
 
 
@@ -13,7 +14,8 @@ import { AdvertDetailsComponent } from './advert-details/advert-details.componen
     AdvertsPageComponent,
     CreateNewComponent,
     MyAdvertsComponent,
-    AdvertDetailsComponent
+    AdvertDetailsComponent,
+    EditAdvertComponent
   ],
   imports: [
     CommonModule,

@@ -78,7 +78,6 @@
 .registration-form .create-account:hover{
     -webkit-box-shadow: 1px 1px 10px 1px #000000; 
     box-shadow: 1px 1px 10px 1px #000000;
-
 }
 
 @media (max-width: 576px) {
