@@ -6,6 +6,7 @@ import { CreateNewComponent } from './create-new/create-new.component';
 import { MyAdvertsComponent } from './my-adverts/my-adverts.component';
 import { AdvertDetailsComponent } from './advert-details/advert-details.component';
 import { EditAdvertComponent } from './edit-advert/edit-advert.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { EditAdvertComponent } from './edit-advert/edit-advert.component';
   ],
   imports: [
     CommonModule,
-    AdvertRoutingModule
+    AdvertRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AdvertModule { }

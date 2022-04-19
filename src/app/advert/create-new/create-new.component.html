@@ -1,14 +1,29 @@
 <div class="container">
     <h2 class="text-center">Create New Advert</h2>
-    <form action="">
+    <form [formGroup]="createFormGroup" action="">
         <div class="mb-3">
-            <label for="name" class="form-label fs-5">Advert Name</label>
-            <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Advert name">
+            <label for="title" class="form-label fs-5">Advert Name</label>
+            <input formControlName="title"
+            [ngClass]="{'is-valid': !createFormGroup.controls['title'].invalid, 'is-invalid': createFormGroup.controls['title'].touched && createFormGroup.controls['title'].invalid }" 
+            type="text" class="form-control form-control-lg" id="title" name="title" placeholder="Advert title">
         </div>
+
+        <ng-container
+            *ngIf="createFormGroup.controls['title'].touched && createFormGroup.controls['title'].invalid">
+            <p *ngIf="createFormGroup.controls['title'].errors.required" class="alert alert-danger">
+                Title is required! 
+            </p>
+
+            <p *ngIf="createFormGroup.controls['title'].errors.minlength" class="alert alert-danger">
+                Title must be at least 4 characters long!
+            </p>
+        </ng-container>
 
         <div class="mb-3">
             <label for="category" class="form-label fs-5">Category</label>
-            <select type="select" class="form-select form-select-lg" id="category" name="category">
+            <select formControlName="category" 
+            [ngClass]="{'is-valid': !createFormGroup.controls['category'].invalid, 'is-invalid': createFormGroup.controls['category'].touched && createFormGroup.controls['category'].invalid }" 
+            type="select" class="form-select form-select-lg" id="category" name="category">
                 <option value="" selected disabled>Select a Category</option>
                 <option value="electronics">Electronics</option>
                 <option value="vehicles">Vehicles</option>
@@ -18,24 +33,72 @@
                 <option value="garden">Garden</option>
             </select>
         </div>
+
+        <ng-container
+            *ngIf="createFormGroup.controls['category'].touched && createFormGroup.controls['category'].invalid">
+            <p *ngIf="createFormGroup.controls['category'].errors.required" class="alert alert-danger">
+                Please select a category!
+            </p>
+        </ng-container>
+
         <div class="mb-3">
             <label for="image" class="form-label form-label fs-5">Image URL</label>
-            <input type="text" class="form-control form-control-lg" id="image" name="image" placeholder="https://">
+            <input type="text" formControlName="image" 
+            [ngClass]="{'is-valid': !createFormGroup.controls['image'].invalid, 'is-invalid': createFormGroup.controls['image'].touched && createFormGroup.controls['image'].invalid }" 
+            class="form-control form-control-lg" id="image" name="image" placeholder="https://">
         </div>
+
+        <ng-container
+            *ngIf="createFormGroup.controls['image'].touched && createFormGroup.controls['image'].invalid">
+            <p *ngIf="createFormGroup.controls['image'].errors.required" class="alert alert-danger">
+                Image is required!
+            </p>
+
+            <p *ngIf="createFormGroup.controls['image'].errors.pattern" class="alert alert-danger">
+                Image must be a valid URL address!
+            </p>
+        </ng-container>
 
         <div class="mb-3">
             <label for="price" class="form-label fs-5">Advert Price</label>
-            <input type="number" class="form-control form-control-lg" id="price" name="price"
-                placeholder="Advert name">
+            <input formControlName="price" 
+            [ngClass]="{'is-valid': !createFormGroup.controls['price'].invalid, 'is-invalid': createFormGroup.controls['price'].touched && createFormGroup.controls['price'].invalid }" 
+            type="number" class="form-control form-control-lg" id="price" name="price"
+                placeholder="Advert price">
         </div>
+
+        <ng-container
+            *ngIf="createFormGroup.controls['price'].touched && createFormGroup.controls['price'].invalid">
+            <p *ngIf="createFormGroup.controls['price'].errors.required" class="alert alert-danger">
+                Price is required!
+            </p>
+
+            <p *ngIf="createFormGroup.controls['price'].errors.min" class="alert alert-danger">
+                Price cannot be less than 0!
+            </p>
+        </ng-container>
 
         <div class="mb-3">
             <label for="description" class="form-label fs-5">Advert Description</label>
-            <textarea class="form-control form-control-lg" id="description" placeholder="Advert description"
-                name="description" rows="15"></textarea>
+            <textarea formControlName="description" 
+            [ngClass]="{'is-valid': !createFormGroup.controls['description'].invalid, 'is-invalid': createFormGroup.controls['description'].touched && createFormGroup.controls['description'].invalid }" 
+            class="form-control form-control-lg" id="description" placeholder="Advert description"
+            name="description" rows="15"></textarea>
         </div>
+
+        <ng-container
+            *ngIf="createFormGroup.controls['description'].touched && createFormGroup.controls['description'].invalid">
+            <p *ngIf="createFormGroup.controls['description'].errors.required" class="alert alert-danger">
+                Description is required!
+            </p>
+
+            <p *ngIf="createFormGroup.controls['description'].errors.minlength" class="alert alert-danger">
+                Description must be at least 10 characters long!
+            </p>
+        </ng-container>
+
         <div class="d-grid gap-2">
-            <button class="btn btn-primary btn-success btn-lg fs-4">Submit</button>
+            <button [disabled]="createFormGroup.invalid" class="btn btn-primary btn-success btn-lg fs-4">Submit</button>
         </div>
     </form>
 </div>
